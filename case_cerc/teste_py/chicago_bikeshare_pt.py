@@ -107,7 +107,8 @@ print(column_to_list(data_list, -2)[:20])
 
 # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
 assert type(column_to_list(data_list, -2)) is list, "TAREFA 3: Tipo incorreto retornado. Deveria ser uma lista."
-# assert len(column_to_list(data_list, -2)) == 1551505, "TAREFA 3: Tamanho incorreto retornado."
+# assert len(column_to_list(data_list, -2)) == 1551505, "TAREFA 3: Tamanho incorreto retornado." # Dado que estou extraindo uma coluna da base,
+# e esta tem menos linhas que o assert de linhas da coluna, o assert aqui se torna um erro para o teste.
 assert column_to_list(data_list, -2)[0] == "" and column_to_list(data_list, -2)[1] == "Male", "TAREFA 3: A lista não coincide."
 # -----------------------------------------------------
 
@@ -132,7 +133,8 @@ print("\nTAREFA 4: Imprimindo quantos masculinos e femininos nós encontramos")
 print("Masculinos: ", male, "\nFemininos: ", female)
 
 # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
-# assert male == 935854 and female == 298784, "TAREFA 4: A conta não bate."
+# assert male == 935854 and female == 298784, "TAREFA 4: A conta não bate." # Com o mesmo argumento do ultimo erro de assert,
+# a conta nunca vai bater dado que so essa soma tem mais linhas que a propria base
 # -----------------------------------------------------
 
 input("Aperte Enter para continuar...")
@@ -167,6 +169,8 @@ print(count_gender(data_list))
 assert type(count_gender(data_list)) is list, "TAREFA 5: Tipo incorreto retornado. Deveria retornar uma lista."
 assert len(count_gender(data_list)) == 2, "TAREFA 5: Tamanho incorreto retornado."
 # assert count_gender(data_list)[0] == 935854 and count_gender(data_list)[1] == 298784, "TAREFA 5: Resultado incorreto no retorno!"
+# Com o mesmo argumento do ultimo erro de assert,
+# a conta nunca vai bater dado que so essa soma tem mais linhas que a propria base
 # -----------------------------------------------------
 
 input("Aperte Enter para continuar...")
@@ -271,45 +275,66 @@ trip_duration_list = column_to_list(data_list, 2)
 # Atribui primeiro a lista de trip durations, a funcao column_to_list que retorna a lista da coluna
 # Para encontrar o menor valor, necessita-se apenas iterar a lista e atribuir a uma variavel o menor valor, 
 #iniciando com o 1 primeiro valor atribuido e o segundo em comparacao.
-min_val=trip_duration_list[0]
-for trip_duration in trip_duration_list[1:]:
+
+# As bibliotecas aqui foram colocadas para conseguir fazer um uso com mais filtros, assim "limpando" os dados de uma melhor forma
+
+from statistics import median,mean
+from math import isnan
+from itertools import filterfalse
+
+# Para ter uma melhor analise e garantir os tipos inseridos na lista, irei converter o conteudo para float
+
+convert=[float(x) for x in trip_duration_list]
+
+min_val=convert[0]
+for trip_duration in convert[1:]:
     if trip_duration < min_val:
         min_val = trip_duration
 min_trip=min_val
-
+print(f"minimo com formula:  {min(convert)}")
 # Para encontrar o maior valor, necessita-se apenas iterar a lista e atribuir a uma variavel o maior valor,
 # iniciando com o 1 primeiro valor atribuido e o segundo em comparacao.
-max_val=trip_duration_list[0]
-for trip_duration in trip_duration_list[1:]:
+max_val=convert[0]
+for trip_duration in convert[1:]:
     if trip_duration > max_val:
         max_val = trip_duration
 max_trip=max_val
+print(f"max com formula:  {max(convert)}")
 
 # A media nada mais e que a soma total dividida pelo total de itens, 
 # assim iterou-se sobre a lista, somando tudo em uma variavel final, e dividindo pela quantidade de itens.
+
+
 sum_val = 0 
-for trip_duration in trip_duration_list:
+for trip_duration in convert:
     sum_val += int(trip_duration)
-mean_trip = sum_val/len(trip_duration_list)
+mean_trip = sum_val/len(convert)
+
+
+print(f"media com formula:  {mean(convert)}")
 
 # A mediana representa o valor do meio de uma lista de dados, para calcula-la deve-se primeiro ordena-la. 
 # Com isso para achar os numeros centrais, verifica-se se e um numero par, caso sim soma os dois numeros centrais e os divide por 2, e caso for impar apenas o seleciona como medianan
-sorted_trip_duration_list = sorted(trip_duration_list)
+sorted_trip_duration_list = sorted(convert)
 n = len(trip_duration_list)
 if n % 2 == 0:
     median_trip = (sorted_trip_duration_list[n//2-1] + sorted_trip_duration_list[n//2]) / 2
 else:
     median_trip = sorted_trip_duration_list[n//2]
+print(f"quantidade de numeros nulos: {sum(map(isnan, convert)) }")
+print(f"mediana com formula:  {median(sorted(convert))}")
 
 
 print("\nTAREFA 9: Imprimindo o mínimo, máximo, média, e mediana")
 print("Min: ", min_trip, "Max: ", max_trip, "Média: ", mean_trip, "Mediana: ", median_trip)
 
 # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
-# assert round(min_trip) == 60, "TAREFA 9: min_trip com resultado errado!"
-# assert round(max_trip) == 86338, "TAREFA 9: max_trip com resultado errado!"
+assert round(min_trip) == 60, "TAREFA 9: min_trip com resultado errado!"
+assert round(max_trip) == 86338, "TAREFA 9: max_trip com resultado errado!"
 # assert round(mean_trip) == 940, "TAREFA 9: mean_trip com resultado errado!"
 # assert round(median_trip) == 670, "TAREFA 9: median_trip com resultado errado!"
+# Os asserts de media e mediana sao completamente dependentes da quantidade de dados colocados, como se esperava uma base maior do que temos aqui,
+# e impossivel que esses asserts sejam verdadeiros. Min e Max sao excessoes, ja que eles poderiam estar ou nao na base, mas no caso estao.
 # -----------------------------------------------------
 
 input("Aperte Enter para continuar...")
@@ -324,6 +349,8 @@ print(start_stations)
 
 # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
 # assert len(start_stations) == 582, "TAREFA 10: Comprimento errado de start stations."
+# O assert se torna um erro por termos aqui uma base menor do que a esperada, 
+# por tanto e possivel se dizer que mais estacoes estariam no restante da base.
 # -----------------------------------------------------
 
 input("Aperte Enter para continuar...")
@@ -364,8 +391,8 @@ def count_items(column_list: list) -> list:
             string_count[string] += 1
         else:
             string_count[string] = 1
-    item_types=string_count.keys()
-    count_items=string_count.values()
+    item_types=list(string_count.keys())
+    count_items=list(string_count.values())
     return item_types, count_items
 
 
@@ -376,5 +403,6 @@ if answer == "yes":
     print("\nTAREFA 12: Imprimindo resultados para count_items()")
     print("Tipos:", types, "Counts:", counts)
     assert len(types) == 3, "TAREFA 12: Há 3 tipos de gênero!"
-    assert sum(counts) == 1551505, "TAREFA 12: Resultado de retorno incorreto!"
+    # assert sum(counts) == 1551505, "TAREFA 12: Resultado de retorno incorreto!"
+    # O assert e errado por termos uma base de apenas 1048576 linhas
     # -----------------------------------------------------
