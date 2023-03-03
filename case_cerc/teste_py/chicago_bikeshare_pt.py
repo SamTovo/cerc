@@ -26,7 +26,10 @@ input("Aperte Enter para continuar...")
 # TAREFA 1
 # TODO: Imprima as primeiras 20 linhas usando um loop para identificar os dados.
 print("\n\nTAREFA 1: Imprimindo as primeiras 20 amostras")
-# Selecino inicialmente a lista apenas com as informacoes, assim como uma lista de apenas as colunas. Para conseguir identificar os dados, criei uma string com a coluna e seu dado respectivo, apendando tudo isso a uma lista a cada iteracao, e depois apendo esta lista a uma outra, para manter a mesma organizacao do dado.
+# Selecino inicialmente a lista apenas com as informacoes, assim como uma lista de apenas os nomes das colunas. 
+#Para conseguir identificar os dados, criei uma string com a coluna e seu dado respectivo, 
+#apendando tudo isso a uma lista a cada iteracao, e depois apendo esta lista a uma outra, para manter a mesma organizacao do dado.
+
 vinte_primeiras_linhas=data_list[1:21]
 nome_das_colunas=data_list[0]
 lista_final_tarefa_1=[]
@@ -112,6 +115,9 @@ input("Aperte Enter para continuar...")
 # Vamos contar quantos Male (Masculinos) e Female (Femininos) o dataset tem
 # TAREFA 4
 # TODO: Conte cada gênero. Você não deveria usar uma função para isso.
+
+# Para contar a quantidade de cada genero, iterei sobre a lista e adicionei condicionais, para que quando seja male seja adicionado 1 a variavel,
+# E fazendo o mesmo com Female.
 male = 0
 female = 0
 task_4_list=column_to_list(data_list, -2)
@@ -249,7 +255,7 @@ input("Aperte Enter para continuar...")
 male, female = count_gender(data_list)
 print("\nTAREFA 8: Por que a condição a seguir é Falsa?")
 print("male + female == len(data_list):", male + female == len(data_list))
-answer = "A afirmacao parte da premissa de que todos os usuarios estao com este campo preenchido, mas apenas olhando ja para a primeira linha esta claro de que diversos campos estao vazios, ou seja, em len(data_list) esta contenplando todos os campos, mas em male e female nao."
+answer = "A afirmacao parte da premissa de que todos os usuarios estao com este campo preenchido, mas apenas olhando para a primeira linha esta claro de que diversos campos estao vazios, ou seja, em len(data_list) esta contenplando todos os campos, mas em male e female nao."
 print("resposta:", answer)
 
 # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
@@ -263,28 +269,31 @@ input("Aperte Enter para continuar...")
 # Você não deve usar funções prontas para isso, como max() e min().
 trip_duration_list = column_to_list(data_list, 2)
 # Atribui primeiro a lista de trip durations, a funcao column_to_list que retorna a lista da coluna
-
-# Para encontrar o menor valor, necessita-se apenas iterar a lista e atribuir a uma variavel o menor valor, iniciando com o 1 primeiro valor atribuido e o segundo em comparacao.
+# Para encontrar o menor valor, necessita-se apenas iterar a lista e atribuir a uma variavel o menor valor, 
+#iniciando com o 1 primeiro valor atribuido e o segundo em comparacao.
 min_val=trip_duration_list[0]
 for trip_duration in trip_duration_list[1:]:
     if trip_duration < min_val:
         min_val = trip_duration
 min_trip=min_val
 
-# Para encontrar o maior valor, necessita-se apenas iterar a lista e atribuir a uma variavel o maior valor, iniciando com o 1 primeiro valor atribuido e o segundo em comparacao.
+# Para encontrar o maior valor, necessita-se apenas iterar a lista e atribuir a uma variavel o maior valor,
+# iniciando com o 1 primeiro valor atribuido e o segundo em comparacao.
 max_val=trip_duration_list[0]
 for trip_duration in trip_duration_list[1:]:
     if trip_duration > max_val:
         max_val = trip_duration
 max_trip=max_val
 
-# A media nada mais e que a soma total dividida pelo total de itens, assim iterou-se sobre a lista, somando tudo em uma variavel final, e dividindo pela quantidade de itens.
+# A media nada mais e que a soma total dividida pelo total de itens, 
+# assim iterou-se sobre a lista, somando tudo em uma variavel final, e dividindo pela quantidade de itens.
 sum_val = 0 
 for trip_duration in trip_duration_list:
     sum_val += int(trip_duration)
 mean_trip = sum_val/len(trip_duration_list)
 
-# A mediana representa o valor do meio de uma lista de dados, para calcula-la deve-se primeiro ordena-la. Com isso para achar os numeros centrais, verifica-se se e um numero par, caso sim soma os dois numeros centrais e os divide por 2, e caso for impar apenas o seleciona como medianan
+# A mediana representa o valor do meio de uma lista de dados, para calcula-la deve-se primeiro ordena-la. 
+# Com isso para achar os numeros centrais, verifica-se se e um numero par, caso sim soma os dois numeros centrais e os divide por 2, e caso for impar apenas o seleciona como medianan
 sorted_trip_duration_list = sorted(trip_duration_list)
 n = len(trip_duration_list)
 if n % 2 == 0:
