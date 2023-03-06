@@ -30,6 +30,8 @@ print("\n\nTAREFA 1: Imprimindo as primeiras 20 amostras")
 #Para conseguir identificar os dados, criei uma string com a coluna e seu dado respectivo, 
 #apendando tudo isso a uma lista a cada iteracao, e depois apendo esta lista a uma outra, para manter a mesma organizacao do dado.
 
+
+print("Gerando as 20 primeiras linhas, rotuladas.")
 vinte_primeiras_linhas=data_list[1:21]
 nome_das_colunas=data_list[0]
 lista_final_tarefa_1=[]
@@ -63,14 +65,14 @@ input("Aperte Enter para continuar...")
 # TODO: Imprima o `gênero` das primeiras 20 linhas
 
 print("\nTAREFA 2: Imprimindo o gênero das primeiras 20 amostras")
-first_rows_from_task2=data_list[0:20]
-task2_answer_list=[]
-for row in first_rows_from_task2:
+task2_list=data_list[0:20]
+task2_final_list=[]
+for row in task2_list:
     gender=row[-2]
-    task2_answer_list.append(gender)
+    task2_final_list.append(gender)
 
 print('Lista do genero das 20 primeiras amostras')
-print(task2_answer_list)
+print(task2_final_list)
 # Ótimo! Nós podemos pegar as linhas(samples) iterando com um for, e as colunas(features) por índices.
 # Mas ainda é difícil pegar uma coluna em uma lista. Exemplo: Lista com todos os gêneros
 
@@ -119,6 +121,7 @@ input("Aperte Enter para continuar...")
 
 # Para contar a quantidade de cada genero, iterei sobre a lista e adicionei condicionais, para que quando seja male seja adicionado 1 a variavel,
 # E fazendo o mesmo com Female.
+print("Fazendo a contagem de genero")
 male = 0
 female = 0
 task_4_list=column_to_list(data_list, -2)
