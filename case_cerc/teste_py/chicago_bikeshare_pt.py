@@ -291,7 +291,6 @@ for trip_duration in convert[1:]:
     if trip_duration < min_val:
         min_val = trip_duration
 min_trip=min_val
-print(f"minimo com formula:  {min(convert)}")
 # Para encontrar o maior valor, necessita-se apenas iterar a lista e atribuir a uma variavel o maior valor,
 # iniciando com o 1 primeiro valor atribuido e o segundo em comparacao.
 max_val=convert[0]
@@ -299,7 +298,6 @@ for trip_duration in convert[1:]:
     if trip_duration > max_val:
         max_val = trip_duration
 max_trip=max_val
-print(f"max com formula:  {max(convert)}")
 
 # A media nada mais e que a soma total dividida pelo total de itens, 
 # assim iterou-se sobre a lista, somando tudo em uma variavel final, e dividindo pela quantidade de itens.
@@ -311,7 +309,6 @@ for trip_duration in convert:
 mean_trip = sum_val/len(convert)
 
 
-print(f"media com formula:  {mean(convert)}")
 
 # A mediana representa o valor do meio de uma lista de dados, para calcula-la deve-se primeiro ordena-la. 
 # Com isso para achar os numeros centrais, verifica-se se e um numero par, caso sim soma os dois numeros centrais e os divide por 2, e caso for impar apenas o seleciona como medianan
@@ -322,7 +319,6 @@ if n % 2 == 0:
 else:
     median_trip = sorted_trip_duration_list[n//2]
 print(f"quantidade de numeros nulos: {sum(map(isnan, convert)) }")
-print(f"mediana com formula:  {median(sorted(convert))}")
 
 
 print("\nTAREFA 9: Imprimindo o mínimo, máximo, média, e mediana")
